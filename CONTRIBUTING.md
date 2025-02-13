@@ -49,6 +49,11 @@ Ready to contribute? Here's how to set up this repo for local development.
     $ git checkout -b name-of-your-bugfix-or-feature
     ```
 
+3. Make sure you're using our environment.yml to ensure you have all the dependencies.
+
+    3.1 To install the environment.yml, navigate to the root of this project in the terminal
+
+    3.2 Run `conda env create --file environment.yaml`
 3. When you're done making changes, check that your changes conform to any code formatting requirements and pass any tests.
 
 4. Commit your changes and open a pull request.
