@@ -1,6 +1,8 @@
+# Software Content License
+
 MIT License
 
-Copyright (c) 2025 Master of Data Science at the University of British Columbia
+Copyright (c) 2025, Samuel Adetsi, Siddarth Subrahmanian, Brian Chang, Yibin Long.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -19,3 +21,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+# Non-Software Content License
+
+[SpotiPy](https://github.com/UBC-MDS/DSCI-532_2025_20_spotipy) © 2025 by Samuel Adetsi, Siddarth Subrahmanian, Brian Chang, and Yibin Long is licensed under [Creative Commons Attribution 4.0 International](https://creativecommons.org/licenses/by/4.0/?ref=chooser-v1)
