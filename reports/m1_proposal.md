@@ -1,4 +1,10 @@
 ## 1. Motivation and Purpose
+Our Role: Music-Focused Data Scientist Firm
+
+Target Audience: Music Labels
+
+Identifying which artists to sign for a music label is a critical endeavour. Choosing an artist that they will know can perform well will lead the company to making profit by signing them. As well, there could be other challenges such as identifying what types of song characteristics trend by year. Our product aims to visualize the historical data from 2010 to 2019 of top charting songs by artist and their musical characteristics (e.g. valence, danceability, bpm). With our app, users can explore patterns in successful songs, track emerging trends, and make data-driven decisions on which artists to sign and what musical elements drive success.
+
 
 ## 2. Description of the Data
 Our project utilizes the **Top Spotify Songs from 2010-2019** dataset published on Kaggle.  
