@@ -39,8 +39,45 @@ We plan to create a new variable: **average metric per genre** (e.g., average BP
 - Compare differences between genres more efficiently.  
 - Explore changes in genre characteristics over the decade.
 
----
-## 3. Rsearch Questions
+## 3. Research Questions
+Persona: A&R Executive at a Music Label
+Name: Lisa
+Role: A&R (Artists & Repertoire) Executive at a major music label
+Background: Lisa has worked in the music industry for over a decade, scouting and signing new talent. She specializes in identifying artists who can dominate streaming charts and generate long-term revenue.
+Pain Points:
+Struggles with predicting which new artists will gain traction
+Needs data-driven insights to justify signings to executives
+Wants to understand emerging music trends and what characteristics lead to viral hits
+Goals:
+ ✔ Identify rising artists with strong potential
+ ✔ Analyze past trends to predict future hits
+ ✔ Use data to make informed decisions on signing and promoting artists
+
+**User Story & Walkthrough**
+**User Story:**
+As an A&R executive,Lisa wants to explore historical streaming and musical characteristic trends so that she can identify promising new artists and understand what elements contribute to hit songs.
+Walkthrough: How Lisa Uses the Dashboard
+Exploring Top Artists by Year
+Lisa logs into the dashboard and selects "Top Artists (2010-2019)"
+A dynamic chart appears, displaying the most streamed artists per year
+She notices that which Genres have surged in popularity
+Analyzing Hit Song Characteristics
+She switches to the "Musical Characteristics" tab
+A scatterplot shows danceability vs. popularity, revealing that upbeat, high-energy songs tend to perform well
+Identifying Emerging Artists
+She applies filters for with song length and beats per minute.
+The artists and song features chart on the right side changes accordingly 
+Lisa clicks on an artist's profile and sees their streaming history, fan engagement, and song attributes
+Making Data-Driven Decisions
+Based on the insights, she compiles a shortlist of promising artists
+She presents a report to her team, backed by data-driven insights on why these artists fit current trends
+
+**Research Questions**
+Which artists showed the fastest streaming growth before becoming mainstream?
+What song characteristics (BPM, loudness, energy) have been most common in top-charting hits?
+How have musical trends shifted over the decade?
+Are there recurring patterns in hit songs that labels can capitalize on?
+Do certain genres consistently dominate, or is there a cyclical trend?
 
 ## 4. App Sketch and Description
 
