@@ -1,7 +1,45 @@
 ## 1. Motivation and Purpose
 
 ## 2. Description of the Data
+Our project utilizes the **Top Spotify Songs from 2010-2019** dataset published on Kaggle.  
+This dataset contains **603 rows and 14 columns**, representing the **top 50 songs** on Spotify for each year during this time period.
 
+## **Key Variables**
+
+The dataset consists of two primary types of variables:
+
+### **1. Song Metadata**
+- `title`: Title of the track *(categorical)*.
+- `artist`: Name of the artist(s) *(categorical)*.
+- `genre`: Genre of the track *(categorical)*.
+- `year`: The year the track reached the top 50 *(quantitative)*.
+
+### **2. Musical and Audio Features** *(all quantitative)*  
+- **Beats per Minute (BPM):** Tempo of the track.  
+- **energy:** Intensity and activity level (higher = more energetic).  
+- **danceability:** Suitability of the track for dancing.  
+- **loudness (dB):** Sound intensity in decibels.  
+- **liveness:** A "live" feel—higher values show more audience presence.  
+- **valence:** Positivity of the song (higher = happier).  
+- **length:** Duration of the track (in seconds).  
+- **acousticness:** Degree of acoustic quality.  
+- **speechiness:** The presence of spoken words.  
+- **popularity:** A score representing the track's popularity.
+
+### **Relevance to the Problem**
+
+By analyzing these variables, this dataset provides valuable insights into Spotify's most popular tracks. It enables us to address critical questions:  
+1. **What factors make songs successful?**  
+   Use features like BPM, danceability, and valence to determine qualities shared by top-charting songs.  
+2. **Which music genres dominated Spotify, and how have they evolved?**  
+   Compare genre trends over time to understand shifts in popularity.
+
+### **Derived Variable Plan**
+We plan to create a new variable: **average metric per genre** (e.g., average BPM, valence, or popularity by genre). This will allow us to:  
+- Compare differences between genres more efficiently.  
+- Explore changes in genre characteristics over the decade.
+
+---
 ## 3. Rsearch Questions
 
 ## 4. App Sketch and Description
