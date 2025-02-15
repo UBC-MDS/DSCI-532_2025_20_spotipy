@@ -19,14 +19,13 @@ Follow these steps to set up and run the Spotipy Dashboard:
 ### 1. Set Up the Environment
 Use the `requirements.yml` file to create a new Conda environment with all the necessary dependencies. Run the following command in your terminal:
 ```bash
-conda env create -f requirements.yml
+conda env create -f environment.yaml
 ```
 
 Once the setup is complete, activate the environment:
 ```bash
 conda activate 532_project
 ```
-
 ---
 
 ### 2. Run the Dashboard
