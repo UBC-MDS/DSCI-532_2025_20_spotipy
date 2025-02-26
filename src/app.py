@@ -34,6 +34,9 @@ data.columns = ['title',
 # Top artists chart
 artist_elements = html.Div(id='artist-list')
 
+# Scatterplot
+scatterplot = dvc.Vega(id='scatterplot', spec={}, style={'width': '100%', 'marginTop': '1vh'})
+
 # Selectors ------------------
 # Year Selector for Top Artists
 
@@ -143,7 +146,7 @@ app.layout = dbc.Container([
             html.H3("Widget4")
         ], width=4, style={'borderRight': 'solid 3px'}),
         dbc.Col([
-            dvc.Vega(id='scatterplot', spec={}, style={'width': '100%', 'marginTop': '1vh'}),
+            scatterplot,
             artist_elements,
             html.H3("Chart3"),
             html.H3("Chart4")
