@@ -32,7 +32,7 @@ data.columns = ['title',
 
 # Components -----------------
 # Top artists chart
-artist_elements = html.Div(id='artist-list')
+artist_elements = html.Div(id='artist_list')
 
 # Scatterplot
 scatterplot = dvc.Vega(id='scatterplot', spec={}, style={'width': '100%', 'marginTop': '1vh'})
@@ -51,7 +51,7 @@ year_dropdown = html.Div([
         step=1, 
         value=default_year, 
         marks={str(year): str(year) for year in years},
-        id='year-dropdown',
+        id='year_dropdown',
         included=False
     )
 ], style={'marginBottom': '2.5vh'})
@@ -72,8 +72,8 @@ bpm_selector = html.Div([
 # Callbacks ----------------
 # Artist List Callback 
 @callback(
-    Output('artist-list', 'children'),
-    Input('year-dropdown', 'value'),
+    Output('artist_list', 'children'),
+    Input('year_dropdown', 'value'),
     Input('duration_min', 'value'),
     Input('duration_max', 'value'),
     Input('bpm_range', 'value')
@@ -106,7 +106,7 @@ def update_artist_list(selected_year, selected_duration_min, selected_duration_m
 # Scatterplot Callback
 @callback(
     Output('scatterplot', 'spec'),
-    Input('year-dropdown', 'value'),
+    Input('year_dropdown', 'value'),
     Input('duration_min', 'value'),
     Input('duration_max', 'value'),
     Input('bpm_range', 'value')
