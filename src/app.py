@@ -16,7 +16,7 @@ data = pd.read_csv('./data/raw/spotify_songs.csv')
 # Renaming columns
 data.columns = ['title', 
               'artist', 
-              'the genre of the track', 
+              'genre', 
               'year', 
               'bpm', 
               'energy', 
@@ -44,7 +44,7 @@ years = sorted(data['year'].unique())
 default_year = 2010
 
 year_dropdown = html.Div([
-    html.H3("Year"),
+    html.H4("Year"),
     dcc.Slider(
         min=years[0], 
         max=years[-1], 
@@ -58,15 +58,45 @@ year_dropdown = html.Div([
 
 # Song Duration Selector
 song_duration = html.Div([
-    html.H3("Song Duration (s)"),
-    dcc.Input(id="duration_min", type="number", placeholder="Min Duration", debounce=True, value=0),
-    dcc.Input(id="duration_max", type="number", placeholder="Max Duration", debounce=True, value=300)
+    html.H4("Song Duration (s)"),
+    dcc.Input(
+        id="duration_min", 
+        type="number", 
+        placeholder="Min Duration", 
+        debounce=True , 
+        style={
+            'backgroundColor': '#2a2a2a', 'color': 'white', 'border': 'solid white 1px', 'borderRadius': '3px', 'marginRight': '5px', 'padding': '3px', 'paddingLeft': '10px'
+            }
+        ),
+    dcc.Input(
+        id="duration_max", 
+        type="number", 
+        placeholder="Max Duration", 
+        debounce=True, 
+        style={'backgroundColor': '#2a2a2a', 'color': 'white', 'border': 'solid white 1px', 'borderRadius': '3px', 'padding': '3px', 'paddingLeft': '10px'
+               }
+        )
 ], style={'marginBottom': '2.5vh'})
 
 # Beats Per Minute Selector
 bpm_selector = html.Div([
-    html.H3("Beats Per Minute"),
+    html.H4("Beats Per Minute"),
     dcc.RangeSlider(min=40, max=210, step=20, value=[60,140], id='bpm_range')
+], style={'marginBottom': '2.5vh'})
+
+# Genre Selector
+genres = data['genre'].unique()
+
+genre_selector = html.Div([
+    html.H4("Genre"),
+    dcc.Dropdown(
+        id='genre_dropdown',
+        options=[{"label" : genre, "value": genre} for genre in genres],
+        multi=True,
+        placeholder="Search and select genres...",
+        searchable=True,
+        style={'backgroundColor': '#2a2a2a'}
+    )
 ], style={'marginBottom': '2.5vh'})
 
 # Callbacks ----------------
@@ -76,16 +106,22 @@ bpm_selector = html.Div([
     Input('year_dropdown', 'value'),
     Input('duration_min', 'value'),
     Input('duration_max', 'value'),
-    Input('bpm_range', 'value')
+    Input('bpm_range', 'value'),
+    Input('genre_dropdown', 'value')
 )
-def update_artist_list(selected_year, selected_duration_min, selected_duration_max, selected_bpm_range):
+def update_artist_list(selected_year, selected_duration_min, selected_duration_max, selected_bpm_range, selected_genres):
     filtered_data = data[
         (data['year'] == selected_year) &
-        (data['duration'] >= selected_duration_min) &
-        (data['duration'] <= selected_duration_max) &
+        (data['duration'] >= (selected_duration_min if selected_duration_min is not None else 0)) &
+        (data['duration'] <= (selected_duration_max if selected_duration_max is not None else data['duration'].max())) &
         (data['bpm'] >= selected_bpm_range[0]) &
         (data['bpm'] <= selected_bpm_range[1])
-    ].sort_values(by='popularity', ascending=False).head(6)
+    ]
+    
+    if selected_genres:
+        filtered_data = filtered_data[filtered_data['genre'].isin(selected_genres)]
+    
+    filtered_data = filtered_data.sort_values(by='popularity', ascending=False).head(6)
     
     return html.Div([
         html.H3(f"Top Artists in {selected_year}"),
@@ -109,16 +145,20 @@ def update_artist_list(selected_year, selected_duration_min, selected_duration_m
     Input('year_dropdown', 'value'),
     Input('duration_min', 'value'),
     Input('duration_max', 'value'),
-    Input('bpm_range', 'value')
+    Input('bpm_range', 'value'),
+    Input('genre_dropdown', 'value')
 )
-def update_scatterplot(selected_year, selected_duration_min, selected_duration_max, selected_bpm_range):
+def update_scatterplot(selected_year, selected_duration_min, selected_duration_max, selected_bpm_range, selected_genres):
     filtered_data = data[
         (data['year'] == selected_year) &
-        (data['duration'] >= selected_duration_min) &
-        (data['duration'] <= selected_duration_max) &
+        (data['duration'] >= (selected_duration_min if selected_duration_min is not None else 0)) &
+        (data['duration'] <= (selected_duration_max if selected_duration_max is not None else data['duration'].max())) &
         (data['bpm'] >= selected_bpm_range[0]) &
         (data['bpm'] <= selected_bpm_range[1])
     ]
+
+    if selected_genres:
+        filtered_data = filtered_data[filtered_data['genre'].isin(selected_genres)]
 
     return (
         alt.Chart(
@@ -150,11 +190,11 @@ app.layout = dbc.Container([
     dbc.Row([
         dbc.Col([
             html.H1("Spotipy", style={'borderBottom': 'solid #535353 3px', 'paddingBottom': '1rem', 'color': '#1ED760'}),
-            html.H3("Filters", style={'marginBottom': '2.5vh'}),
+            html.H3("Filters", style={'marginBottom': '1.5vh'}),
             year_dropdown,
-            song_duration,
             bpm_selector,
-            html.H3("Widget4")
+            genre_selector,
+            song_duration
         ], width=4, style={'borderRight': 'solid #535353 3px'}),
         dbc.Col([
             scatterplot,
