@@ -25,22 +25,16 @@ data.columns = ['title',
               'speechiness', 
               'popularity']
 
-# Extract top 6 artists by year sorted by popularity
-top_artists_by_year = (
-    data.groupby(['year', 'artist'])['popularity']
-    .sum()
-    .reset_index()
-    .groupby('year')
-    .apply(lambda x: x.nlargest(6, 'popularity'))
-    .reset_index(drop=True)
-)
-
 # Create a list of HTML elements to display the top 6 artists
 years = sorted(data['year'].unique())
 default_year = 2010
 
+# Components
+
 # Top artists chart
 artist_elements = html.Div(id='artist-list')
+
+# Selectors
 
 # Year Selector for Top Artists
 year_dropdown = html.Div([
@@ -56,12 +50,28 @@ year_dropdown = html.Div([
     )
 ])
 
+# Song Duration Selector
+song_duration = html.Div([
+    html.H3("Song Duration (s)"),
+    dcc.Input(id="duration_min", type="number", placeholder="Min Duration", debounce=True, value=0),
+    dcc.Input(id="duration_max", type="number", placeholder="Max Duration", debounce=True, value=300)
+])
+
+# Callbacks
+
 @callback(
     Output('artist-list', 'children'),
-    Input('year-dropdown', 'value')
+    Input('year-dropdown', 'value'),
+    Input('duration_min', 'value'),
+    Input('duration_max', 'value')
 )
-def update_artist_list(selected_year):
-    filtered_data = top_artists_by_year[top_artists_by_year['year'] == selected_year]
+def update_artist_list(selected_year, selected_duration_min, selected_duration_max):
+    # Apply filters on data first
+    filtered_data = data[
+        (data['year'] == selected_year) &
+        (data['duration'] >= selected_duration_min) &
+        (data['duration'] <= selected_duration_max)
+    ].sort_values(by='popularity', ascending=False).head(6)
     
     return html.Div([
         html.H3(f"Top Artists in {selected_year}"),
@@ -79,14 +89,13 @@ def update_artist_list(selected_year):
         ], style={'fontSize': '1.5rem'})
     ])
 
-# Components
 app.layout = dbc.Container([
     dbc.Row([
         dbc.Col([
             html.H1("Spotipy"),
             html.H3("Filters"),
             year_dropdown,
-            html.H3("Widget2"),
+            song_duration,
             html.H3("Widget3"),
             html.H3("Widget4")
         ], width=4, style={'borderRight': 'solid 3px'}),
