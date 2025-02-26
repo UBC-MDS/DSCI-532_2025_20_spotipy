@@ -54,29 +54,37 @@ year_dropdown = html.Div([
         id='year-dropdown',
         included=False
     )
-])
+], style={'marginBottom': '2.5vh'})
 
 # Song Duration Selector
 song_duration = html.Div([
     html.H3("Song Duration (s)"),
     dcc.Input(id="duration_min", type="number", placeholder="Min Duration", debounce=True, value=0),
     dcc.Input(id="duration_max", type="number", placeholder="Max Duration", debounce=True, value=300)
-])
+], style={'marginBottom': '2.5vh'})
 
-# Callbacks ----------
+# Beats Per Minute Selector
+bpm_selector = html.Div([
+    html.H3("Beats Per Minute"),
+    dcc.RangeSlider(min=40, max=210, step=20, value=[60,140], id='bpm_range')
+], style={'marginBottom': '2.5vh'})
+
+# Callbacks ----------------
 # Artist List Callback 
 @callback(
     Output('artist-list', 'children'),
     Input('year-dropdown', 'value'),
     Input('duration_min', 'value'),
-    Input('duration_max', 'value')
+    Input('duration_max', 'value'),
+    Input('bpm_range', 'value')
 )
-def update_artist_list(selected_year, selected_duration_min, selected_duration_max):
-    # Apply filters on data first
+def update_artist_list(selected_year, selected_duration_min, selected_duration_max, selected_bpm_range):
     filtered_data = data[
         (data['year'] == selected_year) &
         (data['duration'] >= selected_duration_min) &
-        (data['duration'] <= selected_duration_max)
+        (data['duration'] <= selected_duration_max) &
+        (data['bpm'] >= selected_bpm_range[0]) &
+        (data['bpm'] <= selected_bpm_range[1])
     ].sort_values(by='popularity', ascending=False).head(6)
     
     return html.Div([
@@ -100,14 +108,16 @@ def update_artist_list(selected_year, selected_duration_min, selected_duration_m
     Output('scatterplot', 'spec'),
     Input('year-dropdown', 'value'),
     Input('duration_min', 'value'),
-    Input('duration_max', 'value')
+    Input('duration_max', 'value'),
+    Input('bpm_range', 'value')
 )
-def update_scatterplot(selected_year, selected_duration_min, selected_duration_max):
-    # Apply filters on data
+def update_scatterplot(selected_year, selected_duration_min, selected_duration_max, selected_bpm_range):
     filtered_data = data[
         (data['year'] == selected_year) &
         (data['duration'] >= selected_duration_min) &
-        (data['duration'] <= selected_duration_max)
+        (data['duration'] <= selected_duration_max) &
+        (data['bpm'] >= selected_bpm_range[0]) &
+        (data['bpm'] <= selected_bpm_range[1])
     ]
 
     return (
@@ -121,7 +131,8 @@ def update_scatterplot(selected_year, selected_duration_min, selected_duration_m
                 alt.Tooltip('artist', title='Artist'), 
                 alt.Tooltip('popularity', title='Popularity'), 
                 alt.Tooltip('danceability', title='Danceability'),
-                alt.Tooltip('duration', title='Duration (Seconds)')
+                alt.Tooltip('duration', title='Duration (Seconds)'),
+                alt.Tooltip('bpm', title='BPM')
             ]
         ).properties(
             title=f'Danceability vs. Popularity in {selected_year}'
@@ -138,20 +149,18 @@ def update_scatterplot(selected_year, selected_duration_min, selected_duration_m
 app.layout = dbc.Container([
     dbc.Row([
         dbc.Col([
-            html.H1("Spotipy"),
-            html.H3("Filters"),
+            html.H1("Spotipy", style={'borderBottom': 'solid #535353 3px', 'paddingBottom': '1rem', 'color': '#1ED760'}),
+            html.H3("Filters", style={'marginBottom': '2.5vh'}),
             year_dropdown,
             song_duration,
-            html.H3("Widget3"),
+            bpm_selector,
             html.H3("Widget4")
-        ], width=4, style={'borderRight': 'solid 3px'}),
+        ], width=4, style={'borderRight': 'solid #535353 3px'}),
         dbc.Col([
             scatterplot,
-            artist_elements,
-            html.H3("Chart3"),
-            html.H3("Chart4")
+            artist_elements
         ], width=8)
-    ], style={'marginTop': '10vh', 'border': 'solid 3px'})
+    ], style={'marginTop': '10vh'})
 ])
 
 # Run the app
