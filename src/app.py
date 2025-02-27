@@ -122,7 +122,7 @@ def update_artist_list(selected_year, selected_duration_min, selected_duration_m
     if selected_genres:
         filtered_data = filtered_data[filtered_data['genre'].isin(selected_genres)]
     
-    filtered_data = filtered_data.sort_values(by='popularity', ascending=False).head(6)
+    filtered_data = filtered_data.sort_values(by='popularity', ascending=False)['artist'].unique()[:6]
     
     return html.Div([
         html.H3(f"Top Artists in {selected_year}"),
@@ -130,12 +130,12 @@ def update_artist_list(selected_year, selected_duration_min, selected_duration_m
             dbc.Col([
                 html.Div(
                         f"{rank}. {artist}"
-                    ) for rank, artist in enumerate(filtered_data['artist'][:3], start=1)
+                    ) for rank, artist in enumerate(filtered_data[:3], start=1)
                 ], width=6),
             dbc.Col([
                 html.Div(
                     f"{rank}. {artist}"
-                    ) for rank, artist in enumerate(filtered_data['artist'][3:], start=4)
+                    ) for rank, artist in enumerate(filtered_data[3:], start=4)
                 ], width=6)
         ], style={'fontSize': '1.5rem'})
     ])
