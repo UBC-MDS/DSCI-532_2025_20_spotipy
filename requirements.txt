@@ -20,7 +20,7 @@ decorator==5.1.*
 editables==0.5.*
 exceptiongroup==1.2.*
 executing==2.1.*
-Flask==3.1.*
+Flask==3.0.*
 gunicorn==23.0.*
 h2==4.2.*
 hatchling==1.27.*
