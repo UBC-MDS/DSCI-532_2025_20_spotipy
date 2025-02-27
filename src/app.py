@@ -9,6 +9,7 @@ alt.theme.enable('carbong90')
 
 # Intialization
 app = Dash(__name__, external_stylesheets=[dbc.themes.CYBORG])
+server = app.server
 
 # Data initialization
 data = pd.read_csv('./data/raw/spotify_songs.csv')
@@ -205,4 +206,4 @@ app.layout = dbc.Container([
 
 # Run the app
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=False)
