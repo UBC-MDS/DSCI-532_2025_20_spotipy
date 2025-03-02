@@ -191,11 +191,11 @@ footer = dbc.Container(
         html.Hr(style={'borderColor': '#535353'}),
         html.P("Spotipy Dashboard - An interactive visualization tool for exploring Spotify song data.", 
                style={'textAlign': 'center', 'color': 'white'}),
-        html.P("Created by: Yibin,Brian,Sam,Siddarth", 
+        html.P("Created by: Yibin, Brian, Sam, Siddarth", 
                style={'textAlign': 'center', 'color': 'white'}),
         html.A("GitHub Repository", href="https://github.com/UBC-MDS/DSCI-532_2025_20_spotipy", target="_blank", 
                style={'display': 'block', 'textAlign': 'center', 'color': '#1ED760', 'textDecoration': 'none'}),
-        html.P("Last updated: March 2025", style={'textAlign': 'center', 'color': 'white'}),
+        html.P("Last Updated: March 1, 2025", style={'textAlign': 'center', 'color': 'white'}),
     ],
     fluid=True,
     style={'marginTop': '2rem', 'padding': '1rem', 'backgroundColor': '#181818', 'borderTop': 'solid #535353 3px'}
