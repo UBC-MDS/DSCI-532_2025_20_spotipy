@@ -36,7 +36,7 @@ data.columns = ['title',
 artist_elements = html.Div(id='artist_list')
 
 # Scatterplot
-scatterplot = dvc.Vega(id='scatterplot', spec={}, style={'width': '100%', 'marginTop': '1vh'})
+scatterplot = dvc.Vega(id='scatterplot', opt={"actions": False}, spec={}, style={'width': '100%', 'marginTop': '1vh'})
 
 # Selectors ------------------
 # Year Selector for Top Artists
@@ -182,47 +182,61 @@ def update_scatterplot(selected_year, selected_duration_min, selected_duration_m
             titleFontSize=20
         ).configure_title(
             fontSize=20
+        ).configure(
+            background='#282828'
         ).to_dict()
     )
 
 # Footer Component
 footer = dbc.Container(
     [
-        html.Hr(style={'borderColor': '#535353'}),
         html.P("Spotipy Dashboard - An interactive visualization tool for exploring Spotify song data.", 
-               style={'textAlign': 'center', 'color': 'white'}),
+               style={'textAlign': 'center'}),
         html.P("Created by: Yibin, Brian, Sam, Siddarth", 
-               style={'textAlign': 'center', 'color': 'white'}),
+               style={'textAlign': 'center'}),
         html.A("GitHub Repository", href="https://github.com/UBC-MDS/DSCI-532_2025_20_spotipy", target="_blank", 
                style={'display': 'block', 'textAlign': 'center', 'color': '#1ED760', 'textDecoration': 'none'}),
-        html.P("Last Updated: March 1, 2025", style={'textAlign': 'center', 'color': 'white'}),
+        html.P("Last Updated: March 1, 2025", style={'textAlign': 'center'}),
     ],
     fluid=True,
-    style={'marginTop': '2rem', 'padding': '1rem', 'backgroundColor': '#181818', 'borderTop': 'solid #535353 3px'}
+    style={
+        'padding': '1rem', 
+        'borderTop': 'solid #535353 3px',
+        'color': 'gray',
+        'marginTop': '5vh'
+        }
 )
     
 # App Layout with Footer
 app.layout = dbc.Container([
     dbc.Row([
         dbc.Col([
-            html.H1("Spotipy", style={'borderBottom': 'solid #535353 3px', 'paddingBottom': '1rem', 'color': '#1ED760'}),
-            html.H3("Filters", style={'marginBottom': '1.5vh'}),
-            year_dropdown,
-            bpm_selector,
-            genre_selector,
-            song_duration
+            html.H1(
+                "Spotipy", 
+                style={
+                    'borderBottom': 'solid #535353 3px', 
+                    'paddingBottom': '1rem', 
+                    'color': '#1ED760',
+                    'textAlign': 'center'
+                    }),
+            dbc.Card(
+                year_dropdown, body=True, style={'marginBottom': '1.5vh'}
+            ),
+            dbc.Card(bpm_selector, body = True, style={'marginBottom': '1.5vh'}),
+            dbc.Card(genre_selector, body = True, style={'marginBottom': '1.5vh'}),
+            dbc.Card(song_duration, body = True, style={'marginBottom': '1.5vh'})
         ], width=4, style={'borderRight': 'solid #535353 3px'}),
         dbc.Col([
-            scatterplot,
-            artist_elements
+            dbc.Card(scatterplot, body=True, style={'marginBottom': '1.5vh'}),
+            dbc.Card(artist_elements, body=True, style={'marginBottom': '1.5vh'})
         ], width=8)
     ], style={'marginTop': '10vh'}),
     
     # Footer Section
     footer
-], fluid=True)
+])
 
 
 # Run the app
 if __name__ == '__main__':
-    app.run(debug=False)
+    app.run(debug=True)
