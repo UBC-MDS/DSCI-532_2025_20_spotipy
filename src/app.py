@@ -8,7 +8,7 @@ import pandas as pd
 alt.theme.enable('carbong90')
 
 # Intialization
-app = Dash(__name__, external_stylesheets=[dbc.themes.CYBORG])
+app = Dash(__name__, external_stylesheets=[dbc.themes.CYBORG], title='Spotipy')
 server = app.server
 
 # Data initialization
@@ -178,10 +178,10 @@ def update_scatterplot(selected_year, selected_duration_min, selected_duration_m
         ).properties(
             title=f'Danceability vs. Popularity in {selected_year}'
         ).configure_axis(
-            labelFontSize=16,
-            titleFontSize=20
+            labelFontSize=20,
+            titleFontSize=24
         ).configure_title(
-            fontSize=20
+            fontSize=24
         ).configure(
             background='#282828'
         ).to_dict()
@@ -203,7 +203,7 @@ footer = dbc.Container(
         'padding': '1rem', 
         'borderTop': 'solid #535353 3px',
         'color': 'gray',
-        'marginTop': '5vh'
+        'marginTop': '15vh'
         }
 )
     
