@@ -28,7 +28,7 @@ def update_artist_list(selected_year, selected_duration_min, selected_duration_m
     filtered_data = filtered_data.sort_values(by='popularity', ascending=False)['artist'].unique()[:6]
     
     return html.Div([
-        html.H3(f"Top Artists in {selected_year}"),
+        html.H4(f"Top Artists in {selected_year}"),
         dbc.Row([
             dbc.Col([
                 html.Div(
