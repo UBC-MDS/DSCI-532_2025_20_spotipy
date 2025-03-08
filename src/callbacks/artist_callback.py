@@ -25,7 +25,13 @@ def update_artist_list(selected_year, selected_duration_min, selected_duration_m
     if selected_genres:
         filtered_data = filtered_data[filtered_data['genre'].isin(selected_genres)]
     
-    filtered_data = filtered_data.sort_values(by='popularity', ascending=False)[['artist', 'popularity']].drop_duplicates('artist')[:6]
+    # Deal with multiple songs by same artist by averaging the popularity
+    filtered_data = (filtered_data.groupby('artist')['popularity']
+                    .agg(['mean', 'count'])
+                    .reset_index()
+                    .sort_values(by='mean', ascending=False)
+                    .head(6)
+                    .rename(columns={'mean': 'popularity'}))
     
     def create_artist_row(artist, popularity, rank):
         return dbc.Row([
@@ -35,7 +41,7 @@ def update_artist_list(selected_year, selected_duration_min, selected_duration_m
                 style={'textAlign': 'left'}
             ),
             dbc.Col(
-                f"{popularity}%", 
+                f"{popularity:.0f}%",
                 width=4,
                 style={'textAlign': 'right'}
             )
@@ -55,7 +61,24 @@ def update_artist_list(selected_year, selected_duration_min, selected_duration_m
         return f'hsl(145, 75%, {max(5, 40 - (rank - 1) * 4)}%)'
 
     return html.Div([
-        html.H4(f"Top Artists in {selected_year}", style={'textAlign': 'left', 'marginBottom': '1rem'}),
+        html.H4([
+            "Most ",
+            html.Span(
+                "Popular",
+                id="popularity-tooltip",
+                style={
+                    "textDecoration": "underline",
+                    "cursor": "help",
+                    "textUnderlineOffset": "5px"
+                }
+            ),
+            f" Artists in {selected_year}"
+        ], style={'textAlign': 'left', 'marginBottom': '1rem'}),
+        dbc.Tooltip(
+            "Popularity is calculated as the average popularity score across all songs by an artist in the selected filters.",
+            target="popularity-tooltip",
+            placement="right"
+        ),
         dbc.Row([
             dbc.Col([
                 create_artist_row(artist, popularity, rank) for rank, (artist, popularity) in enumerate(
