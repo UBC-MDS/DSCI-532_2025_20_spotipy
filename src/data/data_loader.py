@@ -2,7 +2,7 @@ import pandas as pd
 
 def load_data():
     # Data initialization
-    data = pd.read_csv('./data/raw/spotify_songs.csv')
+    data = pd.read_csv('../data/raw/spotify_songs.csv')
 
     # Renaming columns
     data.columns = ['title', 
