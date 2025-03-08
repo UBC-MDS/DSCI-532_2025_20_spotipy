@@ -58,7 +58,7 @@ def update_artist_list(selected_year, selected_duration_min, selected_duration_m
         })
     
     def get_artist_color(rank):
-        return f'hsl(145, 75%, {max(5, 40 - (rank - 1) * 4)}%)'
+        return f'hsl(145, 75%, {max(5, 30 - (rank - 1) * 4)}%)'
 
     return html.Div([
         html.H4([
