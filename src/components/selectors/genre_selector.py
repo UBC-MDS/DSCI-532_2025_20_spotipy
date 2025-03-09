@@ -1,5 +1,5 @@
 from dash import html, dcc
-from data.data_loader import load_data
+from data_loader.data_loader import load_data
 
 data = load_data()
 

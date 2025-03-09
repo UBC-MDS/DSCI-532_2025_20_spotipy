@@ -1,6 +1,6 @@
 from dash import callback, Output, Input, html
 import dash_bootstrap_components as dbc
-from data.data_loader import load_data
+from data_loader.data_loader import load_data
 
 data = load_data()
 
