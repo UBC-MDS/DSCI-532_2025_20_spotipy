@@ -1,0 +1,4 @@
+src/callbacks/__pycache__/
+src/components/__pycache__/
+src/components/selectors/__pycache__/
+src/data_loader/__pycache__/
