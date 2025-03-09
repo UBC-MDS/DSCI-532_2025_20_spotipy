@@ -3,7 +3,7 @@ import dash_bootstrap_components as dbc
 
 footer = dbc.Container(
     [
-        html.P("Spotipy Dashboard - An interactive visualization tool for exploring Spotify song data_loader.",
+        html.P("Spotipy Dashboard - An interactive visualization tool for exploring Spotify song data.",
                style={'textAlign': 'center'}),
         html.P("Created by: Yibin, Brian, Sam, Siddarth", 
                style={'textAlign': 'center'}),
