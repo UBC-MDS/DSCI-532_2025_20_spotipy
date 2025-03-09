@@ -9,7 +9,7 @@ footer = dbc.Container(
                style={'textAlign': 'center'}),
         html.A("GitHub Repository", href="https://github.com/UBC-MDS/DSCI-532_2025_20_spotipy", target="_blank", 
                style={'display': 'block', 'textAlign': 'center', 'color': '#1ED760', 'textDecoration': 'none'}),
-        html.P("Last Updated: March 1, 2025", style={'textAlign': 'center'}),
+        html.P("Last Updated: March 9, 2025", style={'textAlign': 'center'}),
     ],
     fluid=True,
     style={
