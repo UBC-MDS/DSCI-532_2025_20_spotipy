@@ -7,6 +7,7 @@ from components.selectors.year_dropdown_selector import year_dropdown
 from components.selectors.bpm_selector import bpm_selector
 from components.selectors.genre_selector import genre_selector
 from components.selectors.song_duration_selector import song_duration
+from components.selectors.axis_selector import y_axis_selector
 
 # Import our UI components
 from components.artist_list import artist_elements
@@ -41,6 +42,7 @@ app.layout = dbc.Container([
             ),
             dbc.Card(bpm_selector, body = True, style={'marginBottom': '1.5vh'}),
             dbc.Card(genre_selector, body = True, style={'marginBottom': '1.5vh'}),
+            dbc.Card(y_axis_selector, body = True, style={'marginBottom': '1.5vh'}),
             dbc.Card(song_duration, body = True, style={'marginBottom': '1.5vh'})
         ], width=4, style={'borderRight': 'solid #535353 3px'}),
         dbc.Col([
