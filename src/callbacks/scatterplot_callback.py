@@ -32,11 +32,12 @@ def update_scatterplot(attribute, selected_year, selected_duration_min, selected
         ).mark_point(filled=True, size=100, color='#1ED760').encode(
             x=alt.X('popularity', title='Popularity', scale=alt.Scale(zero=False)),
             y=alt.Y(attribute, title=f'{attribute.title()}', scale=alt.Scale(zero=False)),
+            color=alt.Color('genre', title='Genre'),
             tooltip=[
                 alt.Tooltip('title', title='Song Title'), 
                 alt.Tooltip('artist', title='Artist'), 
                 alt.Tooltip('popularity', title='Popularity'), 
-                alt.Tooltip(attribute, title=attribute),
+                alt.Tooltip(attribute, title=attribute.title()),
                 alt.Tooltip('duration', title='Duration (Seconds)'),
                 alt.Tooltip('bpm', title='BPM')
             ]

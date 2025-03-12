@@ -28,15 +28,17 @@ server = app.server
 # App Layout with Footer
 app.layout = dbc.Container([
     dbc.Row([
-        dbc.Col([
-            html.H1(
+        html.H1(
                 "Spotipy", 
                 style={
                     'borderBottom': 'solid #535353 3px', 
-                    'paddingBottom': '1rem', 
+                    'paddingBottom': '1.5rem', 
                     'color': '#1ED760',
                     'textAlign': 'center'
                     }),
+    ], style={'marginTop': '5vh'}),
+    dbc.Row([
+        dbc.Col([
             dbc.Card(
                 year_dropdown, body=True, style={'marginBottom': '1.5vh'}
             ),
@@ -49,7 +51,7 @@ app.layout = dbc.Container([
             dbc.Card(scatterplot, body=True, style={'marginBottom': '1.5vh'}),
             dbc.Card(artist_elements, body=True, style={'marginBottom': '1.5vh'})
         ], width=8)
-    ], style={'marginTop': '10vh'}),
+    ]),
     footer
 ])
 

@@ -7,17 +7,31 @@ song_duration = html.Div([
         id="duration_min", 
         type="number", 
         placeholder="Min Duration", 
-        debounce=True , 
+        debounce=True, 
+        min=0,
         style={
-            'backgroundColor': '#2a2a2a', 'color': 'white', 'border': 'solid white 1px', 'borderRadius': '3px', 'marginRight': '5px', 'padding': '3px', 'paddingLeft': '10px'
-            }
+            'backgroundColor': '#2a2a2a', 
+            'color': 'white', 
+            'border': 'solid white 1px', 
+            'borderRadius': '3px', 
+            'marginRight': '5px', 
+            'padding': '3px', 
+            'paddingLeft': '10px'
+        }
         ),
     dcc.Input(
         id="duration_max", 
         type="number", 
         placeholder="Max Duration", 
         debounce=True, 
-        style={'backgroundColor': '#2a2a2a', 'color': 'white', 'border': 'solid white 1px', 'borderRadius': '3px', 'padding': '3px', 'paddingLeft': '10px'
-               }
+        min=0,
+        style={
+            'backgroundColor': '#2a2a2a',
+            'color': 'white', 
+            'border': 'solid white 1px', 
+            'borderRadius': '3px', 
+            'padding': '3px', 
+            'paddingLeft': '10px'
+        }
         )
 ], style={'marginBottom': '2.5vh'})
