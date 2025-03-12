@@ -6,7 +6,7 @@ data = load_data()
 
 # Create Y-axis Selector
 columns_for_selection = [col for col in data.columns if
-                         col not in ['title', 'artist', 'genre', 'year']]  # Exclude non-numeric or irrelevant columns
+                         col not in ['title', 'artist', 'genre', 'year', 'popularity']]  # Exclude non-numeric or irrelevant columns
 default_y_axis = 'danceability'  # Default Y-axis column
 
 y_axis_selector = html.Div([
