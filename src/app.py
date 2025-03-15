@@ -15,8 +15,8 @@ from components.scatterplot import scatterplot
 from components.footer import footer
 
 # Import our callbacks
-from callbacks.artist_callback import *  
-from callbacks.scatterplot_callback import * 
+from callbacks.artist_callback import *
+from callbacks.scatterplot_callback import *
 
 # Set Altair theme to dark
 alt.theme.enable('carbong90')
@@ -29,32 +29,31 @@ server = app.server
 app.layout = dbc.Container([
     dbc.Row([
         html.H1(
-                "Spotipy", 
-                style={
-                    'borderBottom': 'solid #535353 3px', 
-                    'paddingBottom': '1.5rem', 
-                    'color': '#1ED760',
-                    'textAlign': 'center'
-                    }),
+            "Spotipy",
+            style={
+                'borderBottom': 'solid #535353 3px',
+                'paddingBottom': '1.5rem',
+                'color': '#1ED760',
+                'textAlign': 'center'
+            }),
     ], style={'marginTop': '5vh'}),
     dbc.Row([
         dbc.Col([
             dbc.Card(
-                year_dropdown, body=True, style={'marginBottom': '1.5vh'}
+                year_dropdown, body=True, style={'marginBottom': '2.3vh', 'padding': '2.6vh 0'}
             ),
-            dbc.Card(bpm_selector, body = True, style={'marginBottom': '1.5vh'}),
-            dbc.Card(genre_selector, body = True, style={'marginBottom': '1.5vh'}),
-            dbc.Card(y_axis_selector, body = True, style={'marginBottom': '1.5vh'}),
-            dbc.Card(song_duration, body = True, style={'marginBottom': '1.5vh'})
+            dbc.Card(bpm_selector, body=True, style={'marginBottom': '2.3vh','padding': '2.6vh 0'}),
+            dbc.Card(genre_selector, body=True, style={'marginBottom': '2.3vh','padding': '2.6vh 0'}),
+            dbc.Card(song_duration, body=True, style={'padding': '2.5vh 2.0vh'})
         ], width=4, style={'borderRight': 'solid #535353 3px'}),
         dbc.Col([
+            dbc.Card(y_axis_selector, body=True, style={'marginBottom': '1.5vh'}),
             dbc.Card(scatterplot, body=True, style={'marginBottom': '1.5vh'}),
-            dbc.Card(artist_elements, body=True, style={'marginBottom': '1.5vh'})
+            dbc.Card(artist_elements, body=True, style={'marginBottom': '1.5vh', 'padding': '0vh 1.5vh', "height": "26.5vh"})
         ], width=8)
     ]),
     footer
 ])
-
 
 # Run the app
 if __name__ == '__main__':
