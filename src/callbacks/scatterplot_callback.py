@@ -3,6 +3,15 @@ import altair as alt
 from data_loader.data_loader import load_data
 
 data = load_data()
+genre_color = alt.Color(
+    'genre',
+    title='Genre',
+    scale=alt.Scale(
+        domain=['Rock/Alternative', 'Hip-Hop/Rap', 'Pop', 'Electronic/Dance'],
+        range=['#FF5733', '#33A1FF', '#FFC300', '#6A1B9A']
+    )
+)
+
 
 # Scatterplot Callback
 @callback(
@@ -32,7 +41,7 @@ def update_scatterplot(attribute, selected_year, selected_duration_min, selected
         ).mark_point(filled=True, size=100, color='#1ED760').encode(
             x=alt.X('popularity', title='Popularity', scale=alt.Scale(zero=False)),
             y=alt.Y(attribute, title=f'{attribute.title()}', scale=alt.Scale(zero=False)),
-            color=alt.Color('genre', title='Genre'),
+            color=genre_color,
             tooltip=[
                 alt.Tooltip('title', title='Song Title'), 
                 alt.Tooltip('artist', title='Artist'), 
