@@ -12,6 +12,13 @@ genre_color = alt.Color(
     )
 )
 
+attribute_scales = {}
+columns_for_scaling = [col for col in data.columns if col not in ['title', 'artist', 'genre', 'year', 'popularity']]
+for col in columns_for_scaling:
+    attribute_scales[col] = {
+        'min': data[col].min(),
+        'max': data[col].max()
+    }
 
 # Scatterplot Callback
 @callback(
@@ -35,12 +42,17 @@ def update_scatterplot(attribute, selected_year, selected_duration_min, selected
     if selected_genres:
         filtered_data = filtered_data[filtered_data['genre'].isin(selected_genres)]
 
+    y_scale = alt.Scale(
+        domain=[attribute_scales[attribute]['min'], attribute_scales[attribute]['max']],
+        zero=False
+    )
+
     return (
         alt.Chart(
             filtered_data, width='container'
         ).mark_point(filled=True, size=100, color='#1ED760').encode(
             x=alt.X('popularity', title='Popularity', scale=alt.Scale(zero=False)),
-            y=alt.Y(attribute, title=f'{attribute.title()}', scale=alt.Scale(zero=False)),
+            y=alt.Y(attribute, title=f'{attribute.title()}', scale=y_scale),
             color=genre_color,
             tooltip=[
                 alt.Tooltip('title', title='Song Title'), 
