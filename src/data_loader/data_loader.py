@@ -1,7 +1,33 @@
 import os
 import pandas as pd
+from functools import cache
 
 
+#function to preprocess data
+def preprocess_data(input_filepath: str, output_filepath: str):
+    """
+    Load raw data, preprocess it, and save it in a binary format (Feather) for fast loading.
+    
+    Parameters:
+    input_filepath (str): Path to the raw data file.
+    output_filepath (str): Path where the processed data will be saved.
+    """
+    # Load raw data
+    df = pd.read_csv(input_filepath)
+
+    # Example preprocessing steps
+    df = df.dropna()  # Remove missing values
+    df = df.drop_duplicates()  # Remove duplicate rows
+
+    # Save processed data in Feather format
+    os.makedirs(os.path.dirname(output_filepath), exist_ok=True)
+    df.to_feather(output_filepath)
+    print(f"Processed data saved to {output_filepath}")
+
+    return df  
+
+
+@cache
 def load_data():
     """
     Dynamically locate and load the Spotify songs CSV file from the root 'data/raw' folder.
@@ -10,11 +36,14 @@ def load_data():
     """
     project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../"))
     file_path = os.path.join(project_root, 'data', 'raw', 'spotify_songs.csv')
+    processed_file = os.path.join(project_root, 'data', 'processed', 'processed_data.feather')
 
     if not os.path.exists(file_path):
         raise FileNotFoundError(f"File not found: {file_path}. Please verify the file location.")
 
-    data = pd.read_csv(file_path)
+    preprocess_data(file_path, processed_file)
+
+    data = pd.read_feather(processed_file)
 
     data.columns = ['title',
                     'artist',
