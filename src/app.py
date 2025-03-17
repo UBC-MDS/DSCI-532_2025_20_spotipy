@@ -17,6 +17,7 @@ from components.footer import footer
 # Import our callbacks
 from callbacks.artist_callback import *
 from callbacks.scatterplot_callback import *
+from callbacks.duration_validation_callback import *
 
 # Set Altair theme to dark
 alt.theme.enable('carbong90')
