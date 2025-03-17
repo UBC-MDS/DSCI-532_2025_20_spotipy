@@ -85,12 +85,12 @@ def update_artist_list(selected_year, selected_duration_min, selected_duration_m
                     zip(filtered_data['artist'][:3], filtered_data['popularity'][:3]), 
                     start=1
                 )
-            ], width=6),
+            ], width=6, style={'paddingRight': '0.5rem'}),
             dbc.Col([
                 create_artist_row(artist, popularity, rank) for rank, (artist, popularity) in enumerate(
                     zip(filtered_data['artist'][3:], filtered_data['popularity'][3:]), 
                     start=4
                 )
-            ], width=6)
-        ], style={'margin': '0.125rem'})
-    ])
+            ], width=6, style={'paddingLeft': '0.5rem'})
+        ], style={'margin': '0', 'width': '100%'})
+    ], style={'width': '100%', 'paddingRight': '1rem'})

@@ -49,7 +49,13 @@ app.layout = dbc.Container([
         dbc.Col([
             dbc.Card(y_axis_selector, body=True, style={'marginBottom': '1.5vh'}),
             dbc.Card(scatterplot, body=True, style={'marginBottom': '1.5vh'}),
-            dbc.Card(artist_elements, body=True, style={'marginBottom': '1.5vh', 'padding': '0vh 1.5vh', "height": "26.5vh"})
+            dbc.Card(artist_elements, body=True, style={
+                'marginBottom': '1.5vh', 
+                'padding': '0vh 1.5vh', 
+                "height": "auto", 
+                "minHeight": "26.5vh", 
+                "overflow": "hidden"
+            })
         ], width=8)
     ]),
     footer
