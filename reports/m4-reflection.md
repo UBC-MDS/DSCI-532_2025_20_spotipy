@@ -13,6 +13,11 @@ Functional Enhancements
 - Implemented a minimum duration check, ensuring that the min duration value does not exceed the max duration.
 - Adjusted input boxes to be properly aligned.
 
+Performance Improvements:
+- Used a binary format for faster data loading. Used Feather format
+- Preprocessing the data and saving it in data/processed/, so the app doesn’t do unnecessary filtering/mutations.
+- Implemented caching for data preprocessing and loading.
+
 Refined Scatter Plot (Danceability vs. Popularity):
 - Set Danceability as the default y-axis attribute for more meaningful insights.
 - Mapped genres to broader parent genres, making the data more informative.
