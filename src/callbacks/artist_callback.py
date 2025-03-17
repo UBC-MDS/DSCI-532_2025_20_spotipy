@@ -25,6 +25,22 @@ def update_artist_list(selected_year, selected_duration_min, selected_duration_m
     if selected_genres:
         filtered_data = filtered_data[filtered_data['genre'].isin(selected_genres)]
     
+    # Check if there are no songs matching the criteria
+    if filtered_data.empty:
+        return html.Div([
+            html.H4(f"Most Popular Artists in {selected_year}", 
+                   style={'textAlign': 'left', 'marginBottom': '1rem'}),
+            html.Div(
+                "No songs match your current filter criteria. Try adjusting your filters.",
+                style={
+                    'textAlign': 'center',
+                    'padding': '2rem',
+                    'color': '#999',
+                    'fontSize': '1.2rem'
+                }
+            )
+        ], style={'width': '100%', 'paddingRight': '1rem'})
+    
     # Deal with multiple songs by same artist by averaging the popularity
     filtered_data = (filtered_data.groupby('artist')['popularity']
                     .agg(['mean', 'count'])

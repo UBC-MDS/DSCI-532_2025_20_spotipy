@@ -42,6 +42,31 @@ def update_scatterplot(attribute, selected_year, selected_duration_min, selected
 
     if selected_genres:
         filtered_data = filtered_data[filtered_data['genre'].isin(selected_genres)]
+    
+    # Check if there are no songs matching the criteria
+    if filtered_data.empty:
+        # Create an empty chart with a text annotation
+        empty_chart = alt.Chart().mark_text(
+            align='center',
+            baseline='middle',
+            fontSize=20,
+            color='#999'
+        ).encode(
+            text=alt.value("No songs match your current filter criteria. Try adjusting your filters.")
+        ).properties(
+            width='container',
+            height=300,
+            title=f'{attribute.title()} vs. Popularity in {selected_year}'
+        ).configure_axis(
+            labelFontSize=20,
+            titleFontSize=24
+        ).configure_title(
+            fontSize=24
+        ).configure(
+            background='#282828'
+        )
+        
+        return empty_chart.to_dict()
 
     y_scale = alt.Scale(
         domain=[attribute_scales[attribute]['min'], attribute_scales[attribute]['max']],
